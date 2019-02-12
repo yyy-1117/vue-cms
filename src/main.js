@@ -7,7 +7,7 @@ import VueResource from 'vue-resource'
 // 2. 安装 vue-resource
 Vue.use(VueResource)
 
-// 1.引入mint-ui 和 css 
+// 1.引入完整的 mint-ui 和 css 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 //  2.安装mint-ui 
