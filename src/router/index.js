@@ -4,10 +4,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-import homeComponent from '../pages/home'
-import menberComponent from '../pages/menber'
-import shopcarComponent from '../pages/shopcar'
-import searchComponent from '../pages/search'
+// 引入组件  @ 相当于 scr 目录
+import homeComponent from '@/pages/home'
+import menberComponent from '@/pages/menber'
+import shopcarComponent from '@/pages/shopcar'
+import searchComponent from '@/pages/search'
 
 
 export default new Router({

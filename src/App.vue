@@ -3,7 +3,10 @@
     <!-- header 区域 -->
     <mt-header fixed title="Vue移动端项目"></mt-header>
 
-    <router-view/>
+		<!-- 切换组件添加动画 -->
+    <transition>
+			<router-view/>
+		</transition>
 
 
     <!-- tapbar 区域 -->
@@ -38,6 +41,20 @@ export default {
   #app {
     padding-top: 40px;
 		padding-bottom: 50px;
-  }
+		overflow-x: hidden;  // 解决横向滚动条
+	}
+	.v-enter{
+		opacity: 0;
+		transform: translateX(100%)
+	}
+	.v-leave-to{
+		opacity: 0;
+		transform: translateX(-100%);
+		position: absolute; // 解决切换组件会上弹,块级元素独占一行
+	}
+	.v-enter-active,
+	.v-leave-active{
+		transition: all .5s ease;
+	}
 </style>
 
