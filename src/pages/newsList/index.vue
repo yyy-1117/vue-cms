@@ -1,5 +1,5 @@
 <template>
-    <div class="newslist-content">
+    <div class="newslist-container">
         <ul class="mui-table-view">
 				<li class="mui-table-view-cell mui-media" v-for="(item, index) in newsList" :key="index">
 					<router-link :to="'/home/newsInfo/'+item.id">
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="less">
-    .newslist-content{
+    .newslist-container{
         img{
             width: 100%;
         }

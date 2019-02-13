@@ -1,12 +1,15 @@
 <template>
-    <div class="newsInfo-content">
+    <div class="newsInfo-container">
        <h1 class="title">{{newsInfo.title}}</h1>
        <p class="subtitle">
-           <span>发表时间:{{newsInfo.add_time}}</span>
+           <span>发表时间:{{newsInfo.add_time | datastr('YYYY-MM-DD')}}</span>
            <span>点击{{newsInfo.click}}次</span>
        </p>
        <hr>
        <div class="content" v-html="newsInfo.content"></div>
+
+        <!-- 评论子组件 -->
+       <comment-box></comment-box>
     </div>
 </template>
 
@@ -40,7 +43,7 @@ export default {
 </script>
 
 <style lang="less">
-  .newsInfo-content{
+  .newsInfo-container{
         padding: 0 4px;
         .title{
             font-size: 16px;

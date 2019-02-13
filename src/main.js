@@ -33,6 +33,11 @@ Vue.filter('datastr',(data,patent = 'YYYY-MM-DD HH-mm-ss') =>{
   return moment(data).format(patent)
 })
 
+// 引入评论子组件
+import comment from './components/comment'
+// 注册全局评论子组件
+Vue.component('comment-box',comment)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
