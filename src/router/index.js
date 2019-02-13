@@ -9,6 +9,8 @@ import homeComponent from '@/pages/home'
 import menberComponent from '@/pages/menber'
 import shopcarComponent from '@/pages/shopcar'
 import searchComponent from '@/pages/search'
+import newsListComponent from '@/pages/newsList'
+import newsInfoComponent from '@/pages/newsInfo'
 
 
 export default new Router({
@@ -17,7 +19,9 @@ export default new Router({
     {path:'/home',component:homeComponent},
     {path:'/menber',component:menberComponent},
     {path:'/shopcar',component:shopcarComponent},
-    {path:'/search',component:searchComponent}
+    {path:'/search',component:searchComponent},
+    {path:'/home/newsList',component:newsListComponent},
+    {path:'/home/newsList',component:newsListComponent}
   ],
   linkActiveClass:"mui-active"  
 })

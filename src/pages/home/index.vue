@@ -12,10 +12,10 @@
     <!-- 六宫格 -->
       <ul class="mui-table-view mui-grid-view mui-grid-9">
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-          <a href="#">
+          <router-link to="/home/newsList">
             <img src="../../assets/menu1.png" alt="">
             <div class="mui-media-body">新闻资讯</div>
-          </a>
+          </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
           <a href="#">
@@ -52,6 +52,9 @@
 </template>
 
 <script>
+// 使用 Toast  方法 必须引入
+import { Toast } from 'mint-ui';
+
 export default {
   data() {
     return {
@@ -63,9 +66,17 @@ export default {
   },
   methods: {
     getSwipe() {
-      this.$http.get("http://www.lovegf.cn:8899/api/getlunbo").then(result => {
+      this.$http.get("getlunbo").then(result => {
         // console.log(result)
-        this.swipes = result.body.message;
+        if(result.body.status === 0){
+          this.swipes = result.body.message;
+        }else{
+          Toast({
+          message: '获取轮播图失败',
+          position: 'bottom',
+          duration: 5000
+        });
+        }
       });
     }
   }

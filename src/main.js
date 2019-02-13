@@ -22,6 +22,17 @@ import './lib/mui/css/mui.min.css'
 // 引入 mui 扩展的字体图标样式
 import './lib/mui/css/icons-extra.css'
 
+// 设置vue-resource 根目录
+Vue.http.options.root = 'http://www.lovegf.cn:8899/api/';
+
+// 引入 moment 时间格式化插件
+import moment from 'moment'
+
+// 定义全局过滤器
+Vue.filter('datastr',(data,patent = 'YYYY-MM-DD HH-mm-ss') =>{
+  return moment(data).format(patent)
+})
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
