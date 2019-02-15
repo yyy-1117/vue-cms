@@ -53,12 +53,12 @@ export default {
             if(result.body.status === 0){
                 Toast("发表成功"); 
                 //  方法1 手动添加一个对象 追加到数据前面
-            //    let content = {
-            //     add_time: Date.now(),
-            //     content: this.msg,
-            //     user_name: "匿名用户"
-            //    }
-            //    this.comments.unshift(content)
+              //  let content = {
+              //   add_time: Date.now(),
+              //   content: this.msg,
+              //   user_name: "匿名用户"
+              //  }
+              //  this.comments.unshift(content)
 
             // 方法2 直接调用 getComment 方法 并将 pgaeindex 设置为1  comments 设置为空数组
             this.pageindex = 1
@@ -80,7 +80,7 @@ export default {
 .comment-container {
     padding: 5px;
     h4{
-        font-size: 18px;
+        font-size: 15px;
     }
   .sub-container {
       line-height: 40px;

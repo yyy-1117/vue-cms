@@ -35,6 +35,10 @@ Vue.filter('datastr',(data,patent = 'YYYY-MM-DD HH-mm-ss') =>{
   return moment(data).format(patent)
 })
 
+// 引入缩略图插件
+import VuePreview from 'vue-pic-preview'
+Vue.use(VuePreview)
+
 // 引入评论子组件
 import comment from './components/comment'
 // 注册全局评论子组件
