@@ -24,6 +24,8 @@ import './lib/mui/css/icons-extra.css'
 
 // 设置vue-resource 根目录
 Vue.http.options.root = 'http://www.lovegf.cn:8899/api/';
+// 设置 post 请求时的请求格式  application/x-www-form-urlencoded
+Vue.http.options.emulateJSON = true;
 
 // 引入 moment 时间格式化插件
 import moment from 'moment'

@@ -9,7 +9,7 @@
        <div class="content" v-html="newsInfo.content"></div>
 
         <!-- 评论子组件 -->
-       <comment-box></comment-box>
+       <comment-box :id="id"></comment-box>
     </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
     methods:{
         getNewsInfo(){
             this.$http.get('getnew/'+ this.id).then( result => {
-                console.log(result)
+                // console.log(result)
                 if(result.body.status === 0){
                     this.newsInfo = result.body.message[0]
                 }else{
