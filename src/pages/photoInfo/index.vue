@@ -45,7 +45,7 @@ export default {
         // 获取缩略图
         gettHumImages(){
             this.$http.get('getthumimages/'+this.id).then( result => {
-                console.log(result)
+                // console.log(result)
                 if(result.body.status === 0){
                     result.body.message.forEach(item => {
                         item.w = 600
@@ -74,9 +74,12 @@ export default {
             font-size: 14px;
             color: #226aff;
         }
-        img{
-            margin: 5px 10px;
+        .img-box{
+            padding: 0 10px;
+            img{
+                margin: 5px 10px;
 
-        }            
+            }       
+        }     
     }
 </style>
