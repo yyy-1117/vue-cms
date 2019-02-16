@@ -1,6 +1,6 @@
 <template>
     <div class="goodsList-container">
-        <div class="goods-items" v-for="(item) in goodsList" :key="item.id">
+        <div class="goods-items" v-for="(item) in goodsList" :key="item.id" @click="goDetail(item.id)">
             <img :src="item.img_url" alt="">
             <h1 class="title">{{item.title}}</h1>
             <div class="info">
@@ -14,6 +14,7 @@
                 </p>
             </div>
         </div>
+        <mt-button type="danger" size="large" @click="getMore">加载更多</mt-button>
     </div>
 </template>
 
@@ -31,13 +32,22 @@ export default {
         // 获取商品数据
         getGoodsList(){
             this.$http.get('getgoods?pageindex='+this.pageIndex).then( result => {
-                console.log(result)
+                // console.log(result)
                 if(result.body.status === 0){
-                    this.goodsList = result.body.message
+                    this.goodsList = this.goodsList.concat(result.body.message)
                 }else{
                     Toast('获取商品信息失败')
                 }
             })
+        },
+        // 加载更多
+        getMore(){
+            this.pageIndex++
+            this.getGoodsList()
+        },
+        // 使用JS形式进行路由跳转
+        goDetail(id){
+            this.$router.push('/home/goodsInfo/'+ id)
         }
     },
     created(){
@@ -62,7 +72,7 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 353px;
+            min-height: 290px;
             img{
                 width: 100%;
             }
@@ -75,7 +85,7 @@ export default {
                 background-color: #eee;
                 p{
                     margin: 0;
-                    color: black;
+                    color:black;
                 }
                 .price{
                     .now{
