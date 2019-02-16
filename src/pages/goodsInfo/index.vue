@@ -1,5 +1,13 @@
 <template>
   <div class="goodsInfo-container">
+
+    <transition 
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter">
+    <div class="ball" v-show="flag" ref="ball"></div>
+    </transition>
+
     <div class="mui-card">
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
@@ -34,7 +42,7 @@
 
           </div>
            <mt-button type="primary" size="small">立即购买</mt-button>
-          <mt-button type="danger" size="small">加入购物车</mt-button>
+          <mt-button type="danger" size="small" @click="addToShopCar">加入购物车</mt-button>
         </div>
       </div>
     </div>
@@ -75,6 +83,7 @@ export default {
       swipes: [], // 商品轮播图数据
       buyCount:1,  // 默认购买商品数
       goodsInfo:{},  // 商品详情数据
+      flag:false
     };
   },
   methods: {
@@ -113,6 +122,32 @@ export default {
     // 跳转到商品评论
     goComment(id){
         this.$router.push('/home/goodsComment/'+ id)
+    },
+    addToShopCar(){
+      this.flag = !this.flag
+    },
+    beforeEnter(el){
+      el.style.transform = "translate(0, 0)"
+    },
+    enter(el,doen){
+      el.offsetWidth;
+
+      //  获取小球在页面中的位置
+      let ball = this.$refs.ball.getBoundingClientRect()
+      //  获取徽标在页面中的位置
+      let badge = document.getElementById('badge').getBoundingClientRect()
+
+      // 获取小球在不同设备下到徽标的移动距离
+      let xDist = badge.left - ball.left
+      let yDist = badge.top - ball.top
+
+
+      el.style.transform = `translate(${xDist}px, ${yDist}px)`
+      el.style.transition = "all .5s cubic-bezier(.4,-0.3,1,.68)"
+      doen()
+    },
+    afterEnter(el){
+      this.flag = !this.flag
     }
   },
   created() {
@@ -124,6 +159,7 @@ export default {
 
 <style lang="less">
 .goodsInfo-container {
+  position: relative;
   .mint-swipe {
     height: 200px;
     text-align: center;
@@ -167,6 +203,16 @@ export default {
   }
   .mui-card-footer{
       display: block;
+  }
+  .ball{
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    position: absolute;
+    left: 136px;
+    top: 349px;
+    border-radius: 50%;
+    z-index: 99;
   }
 }
 </style>

@@ -4,7 +4,7 @@
     <mt-header fixed title="Vue移动端项目"></mt-header>
 
 		<!-- 切换组件添加动画 -->
-    <transition>
+    <transition name="app">
 			<router-view/>
 		</transition>
 
@@ -20,7 +20,7 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item1" to="/shopcar">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">0</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item1" to="/search">
@@ -43,17 +43,17 @@ export default {
 		padding-bottom: 50px;
 		overflow-x: hidden;  // 解决横向滚动条
 	}
-	.v-enter{
+	.app-enter{
 		opacity: 0;
 		transform: translateX(100%)
 	}
-	.v-leave-to{
+	.app-leave-to{
 		opacity: 0;
 		transform: translateX(-100%);
 		position: absolute; // 解决切换组件会上弹,块级元素独占一行
 	}
-	.v-enter-active,
-	.v-leave-active{
+	.app-enter-active,
+	.app-leave-active{
 		transition: all .5s ease;
 	}
 	// 解决使用mui导航栏后,tabBar无法切换
