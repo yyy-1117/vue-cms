@@ -123,8 +123,19 @@ export default {
     goComment(id){
         this.$router.push('/home/goodsComment/'+ id)
     },
+    // 添加到购物车
     addToShopCar(){
       this.flag = !this.flag
+
+      // 将商品的 id 数量 价格 存储到 state 中
+
+      this.$store.commit("addToCar", {
+        id:this.id,
+        count:this.buyCount,
+        price:this.goodsInfo.sell_price,
+        flag:true
+
+      })
     },
     beforeEnter(el){
       el.style.transform = "translate(0, 0)"
