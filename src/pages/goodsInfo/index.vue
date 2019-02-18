@@ -128,7 +128,6 @@ export default {
       this.flag = !this.flag
 
       // 将商品的 id 数量 价格 存储到 state 中
-
       this.$store.commit("addToCar", {
         id:this.id,
         count:this.buyCount,

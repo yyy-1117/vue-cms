@@ -34,10 +34,14 @@ Vue.use(VueScroller)
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
+
+//  进入页面就获取本地存储的购物车数据,如果没有就返回一个空数组,然后将它赋予给 car
+let car = JSON.parse(localStorage.getItem("car") || "[]")
+
 // 创建Vue.Store 实例
 let store = new Vuex.Store({
   state:{
-    car:[] // 存储购物车数据
+    car:car// 存储购物车数据
   },
   mutations:{
     // 1.将商品添加到购物车,如果商品已经存在就只修改 count 
@@ -65,6 +69,9 @@ let store = new Vuex.Store({
     }else{
       state.car[index].count += goodsInfo.count
     }
+
+    // 刷新页面购物车徽标的数据会清空,所以需要将数据存储到本地 
+    localStorage.setItem('car',JSON.stringify(state.car))
     }
   },
   getters:{

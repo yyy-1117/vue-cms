@@ -4,7 +4,9 @@
   :on-infinite="infinite" 
   ref="scroller"
   refreshText="下拉刷新列表"
-  noDataText="已经没有数据了">
+  noDataText="已经没有数据了"
+  refreshLayerColor="#226aff"
+  loadingLayerColor="#226aff">
     <div class="goodsList-container">
       <div
         class="goods-items"
