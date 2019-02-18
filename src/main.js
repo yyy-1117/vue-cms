@@ -27,6 +27,9 @@ Vue.http.options.root = 'http://www.lovegf.cn:8899/api/';
 // 设置 post 请求时的请求格式  application/x-www-form-urlencoded
 Vue.http.options.emulateJSON = true;
 
+// 引入 vue-scroller 插件, 实现上拉刷新下拉加载更多
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 // 引入 vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)

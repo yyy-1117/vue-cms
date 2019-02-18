@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <!-- header 区域 -->
-    <mt-header fixed title="Vue移动端项目"></mt-header>
+    <mt-header fixed title="Vue移动端项目">
+    <mt-button icon="back" slot="left" @click=" $router.go(-1)" v-show="hasBackBtn">返回</mt-button>
+		</mt-header>
 
 		<!-- 切换组件添加动画 -->
     <transition name="app">
@@ -33,7 +35,24 @@
 
 <script>
 export default {
-  name: "App"
+  data() {
+		return {
+		//  hasBackBtn: this.$route.path !== "/home"
+		 hasBackBtn: false
+		}
+	},
+	watch: {
+		// 通过 watch 方法 监听路由, 只要URL地址发生变化就会触发
+		// 第一个参数是新值, 第二个参数是旧值
+		$route(to,from){
+			if(to.path === '/home'){
+				this.hasBackBtn = false
+			}else{
+				this.hasBackBtn = true
+			}
+			//  this.hasBackBtn = to.path !== "/home"
+		}
+	},
 };
 </script>
 
