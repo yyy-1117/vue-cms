@@ -48,9 +48,9 @@ export default {
   methods: {
     // 获取商品数据
     getGoodsList(refresh) {  // 不传递参数默认 false
-        // 可能需要拼接,也可能需要覆盖
+        // 可能需要拼接,也可能需要覆盖        
     return  this.$http.get("getgoods?pageindex=" + this.pageIndex).then(result => {
-        // console.log(result)
+        console.log(result.body)
         if (result.body.status === 0) {
             if(refresh){
                 this.goodsList = result.body.message;
@@ -79,15 +79,20 @@ export default {
     })
     },
     infinite() {
-        setInterval(() => {
+        // 此函数进入页面就会触发????
+        // console.log(111);
+        
+        setTimeout(() => {
         //  下拉加载更多
         this.pageIndex++
         //  此时调用方法获取数据需要拼接,所以不用传参
         this.getGoodsList().then( () => {
         //   调用此方法停止下拉加载更多,需要传递参数告诉它是否已经没有数据了,由于服务器没有提供总数据,手动创建一个数据以便实现效果
-        this.$refs.scroller.finishInfinite( this.goodsList.length === 15 )
+        // console.log(222);
+        
+        this.$refs.scroller.finishInfinite( this.goodsList.length == 15 )
       })
-        }, 2000);
+        }, 100);
     }
   },
   created() {
