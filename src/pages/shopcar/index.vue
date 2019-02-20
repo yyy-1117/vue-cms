@@ -2,13 +2,13 @@
   <div class="shopcar-container">
         <div class="mui-card-content-inner mui-card">
           <ul class="mui-table-view">
-            <li class="mui-table-view-cell mui-media item">
+            <li class="mui-table-view-cell mui-media item" v-for="(item,index) in car" :key="item.id">
                 <mt-switch v-model="flag"></mt-switch>&nbsp;&nbsp;
-                <img class="mui-media-object mui-pull-left" src="http://www.dcloud.io/hellomui/images/shuijiao.jpg">
+                <img class="mui-media-object mui-pull-left" :src="item.thumb_path">
                 <div class="mui-media-body">
-                    <span class="title">标题</span>
+                    <span class="title">{{item.title}}</span>
                   <div class="mui-ellipsis">
-                      <span class="price">¥1111</span>
+                      <span class="price">¥{{item.sell_price}}</span>
                           <input type="button" value="-">
                           <input type="number">
                           <input type="button" value="+">
@@ -20,15 +20,15 @@
       </div>
     <div class="mui-card">
 				<div class="mui-card-content">
-					<div class="mui-card-content-inner jiesuan">
-                        <div class="left">
-            <p>总计（不含运费）</p>
-            <p>
-              已勾选商品
-              <span class="red"></span> 件， 总价
-              <span class="red">￥</span>
-            </p>
-          </div>
+					<div class="mui-card-content-inner total">
+                        <div>
+                            <p>
+                            <span>总计</span>&nbsp;&nbsp;<span>(不含运费)</span>
+                        </p>
+                        <p>
+                            已勾选商品<i class="red">1</i>件,&nbsp;&nbsp;总价<i class="red">¥1111</i>
+                        </p>                  
+                        </div>      
                         <mt-button type="danger">去结算</mt-button>
 					</div>
 				</div>
@@ -40,9 +40,34 @@
 export default {
     data() {
         return {
-            flag:false
+            flag:false,
+            car:[] // 存储购物车数据
         }
     },
+    methods: {
+      getShopCar(){
+        //   调用接口需要 store 中 car 中所有商品的id,手动拼接一个以逗号分隔的字符串
+        let idArr = []
+        this.$store.state.car.forEach(item => {
+            idArr.push(item.id)
+            // 如果没有数据,就不需要发送请求,否则会报错
+            if(idArr.length <= 0){
+                return true
+            }
+        });
+        // console.log(idArr)
+        // 由于Id是 store 中获取的,所以不需要修改路由
+        this.$http.get('goods/getshopcarlist/'+idArr.join(",")).then( result => {
+            console.log(result)
+            if(result.body.status === 0){
+                this.car = result.body.message
+            }
+        })
+      }
+    },
+    created(){
+        this.getShopCar()
+    }
 };
 </script>
 
@@ -74,10 +99,14 @@ export default {
                 background-color: #eee;
             }
          }
-         .jiesuan{
-             display: flex;
-             justify-content: space-between;
-         }
+    }
+    .total{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .red{
+            color: red;
+        }
     }
 }
 </style>

@@ -50,7 +50,6 @@ export default {
     getGoodsList(refresh) {  // 不传递参数默认 false
         // 可能需要拼接,也可能需要覆盖        
     return  this.$http.get("getgoods?pageindex=" + this.pageIndex).then(result => {
-        console.log(result.body)
         if (result.body.status === 0) {
             if(refresh){
                 this.goodsList = result.body.message;
