@@ -66,7 +66,7 @@ export default {
       this.$router.push("/home/goodsInfo/" + id);
     },
     refresh() {
-      // 上拉刷新 重新获取第一页数据并渲染
+      // 下拉刷新 重新获取第一页数据并渲染
     //   console.log(this.$refs.scroller)
     this.pageIndex = 1
     /* 
@@ -81,17 +81,16 @@ export default {
         // 此函数进入页面就会触发????
         // console.log(111);
         
-        setTimeout(() => {
-        //  下拉加载更多
+        // setTimeout(() => {
+        //  上拉加载更多
         this.pageIndex++
         //  此时调用方法获取数据需要拼接,所以不用传参
         this.getGoodsList().then( () => {
         //   调用此方法停止下拉加载更多,需要传递参数告诉它是否已经没有数据了,由于服务器没有提供总数据,手动创建一个数据以便实现效果
-        // console.log(222);
         
         this.$refs.scroller.finishInfinite( this.goodsList.length == 15 )
       })
-        }, 100);
+        // }, 100);
     }
   },
   created() {

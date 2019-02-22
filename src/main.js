@@ -72,6 +72,39 @@ let store = new Vuex.Store({
 
     // 刷新页面购物车徽标的数据会清空,所以需要将数据存储到本地 
     localStorage.setItem('car',JSON.stringify(state.car))
+    },
+    // 用于更新数量,此时第二个参数只需要 id和count
+    updateCount(state,goodsInfo){
+      state.car.some( item => {
+        if(item.id == goodsInfo.id){
+          item.count = goodsInfo.count
+          return true
+        }
+      })
+      // 只要改了car 中的数据就需要将数据存储到本地
+    localStorage.setItem('car',JSON.stringify(state.car))
+    },
+    // 删除商品只需要对应的 id
+    // 没有实现删除
+    removeFromCar(state,id){
+      state.car.some( (item,i) => {
+        if(item.id == id){
+          state.car.splice(i,1)
+          return true
+        }
+      })
+    localStorage.setItem('car',JSON.stringify(state.car))
+    },
+    // 此时的 goodsInfo 只需要id 和 flag 
+    updateSelected(state,goodsInfo){
+      state.car.some( item => {
+        if(item.id == goodsInfo.id){
+          item.flag = !goodsInfo.flag
+          return true
+        }
+      })
+    localStorage.setItem('car',JSON.stringify(state.car))
+
     }
   },
   getters:{
@@ -82,6 +115,37 @@ let store = new Vuex.Store({
         sum += item.count
       });
       return sum
+    },
+    goodsNumber(state){
+      // 获取对应商品的数量 手动创建一个 {id:count} 格式的对象
+      let number = {}
+      state.car.forEach( item => {
+        number[item.id] = item.count
+      });
+      return number
+    },
+    goodsSelected(state){
+      // 获取对应商品选中状态 {id:flag}
+      let o = {}
+      state.car.forEach( item => {
+        o[item.id] = item.flag
+      })
+      console.log(o)
+      return o
+    },
+    // 获取总数量与总价
+    goodsCountAndAmount(state) {
+      let o = {
+        count: 0, // 勾选的数量
+        amount: 0 // 勾选的总价
+      }
+      state.car.forEach(item => {
+        if (item.flag) {
+          o.count += item.count
+          o.amount += item.price * item.count
+        }
+      })
+      return o
     }
   }
 })
